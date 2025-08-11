@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma PC Optimization | Professional Gaming PC Tuning Services</title>
+    <meta name="description" content="Professional PC optimization services to maximize your gaming performance. Fix lag, overheating, and system instability issues.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #0f0f1a;
+            --darker: #0a0a12;
+            --light: #f8f9fa;
+            --accent: #ff4d4d;
+            --accent-dark: #e63c3c;
+            --text: #e0e0e0;
+            --text-dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 4rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 26, 0.7);
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .glowing-text {
+            text-shadow: 0 0 15px rgba(110, 72, 170, 0.8);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 6rem 0;
+        }
+        
+        .problems-section {
+            background-color: var(--darker);
+        }
+        
+        .solution-section {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solution-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        
+        .solution-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-section {
+            background-color: var(--dark);
+        }
+        
+        .notes-section {
+            background-color: var(--darker);
+        }
+        
+        .contact-section {
+            background-color: var(--dark);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 70%;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .problem-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .problem-card h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .problem-card h3::before {
+            content: '⚠️';
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--accent-dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 77, 0.6);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease;
+        }
+        
+        .about-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .note-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid var(--accent);
+            transition: all 0.4s ease;
+        }
+        
+        .note-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .note-card h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .note-card h3::before {
+            content: 'ℹ️';
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 12px;
+            min-width: 280px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-8px);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .contact-card a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        
+        .contact-card a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        footer {
+            background-color: #0a0a12;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .availability {
+            margin-top: 3rem;
+            font-size: 1.2rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: inline-block;
+            max-width: 600px;
+        }
+        
+        .price-tag {
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 2rem 0;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+        }
+        
+        .testimonial-section {
+            background-color: var(--darker);
+            text-align: center;
+        }
+        
+        .testimonials {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-snap-type: x mandatory;
+            margin-top: 3rem;
+        }
+        
+        .testimonial {
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            scroll-snap-align: start;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 4rem 0;
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.3rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            
+            .contact-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(110, 72, 170, 0.8);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(157, 80, 187, 0.9), 0 0 30px rgba(255, 77, 77, 0.6);
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1 class="glowing-text">Sigma PC Optimization</h1>
+            <p class="tagline">MAXIMIZE YOUR GAMING PERFORMANCE WITH PROFESSIONAL PC TUNING</p>
+            <a href="#contact" class="cta-button pulse">GET OPTIMIZED NOW</a>
+        </div>
+    </header>
+    
+    <section class="problems-section">
+        <div class="container">
+            <h2>COMMON PC PERFORMANCE ISSUES</h2>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem; text-align: center;">These are the most frequent problems that prevent your PC from reaching its full potential</p>
+            
+            <div class="problems-grid">
+                <div class="problem-card fade-in">
+                    <h3>Faulty Operating System</h3>
+                    <p>A misconfigured or corrupted OS can significantly slow down your computer and cause instability during gaming sessions.</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <h3>Outdated Drivers</h3>
+                    <p>Old or incorrect drivers can cause performance issues, crashes, and prevent your hardware from working optimally.</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <h3>CPU/GPU Underperformance</h3>
+                    <p>Improper configuration or thermal throttling can drastically reduce your processor and graphics card capabilities.</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <h3>Faulty BIOS Firmware</h3>
+                    <p>An outdated or misconfigured BIOS can prevent your hardware from functioning at its full potential.</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <h3>Over-Optimization</h3>
+                    <p>Many online "optimizations" actually hurt performance by disabling essential services or breaking system functionality.</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <h3>Registry Issues</h3>
+                    <p>A bloated Windows registry can slow down your system and cause various errors and instability.</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <h3>Overheating</h3>
+                    <p>Poor thermal management leads to throttling, reduced performance, and hardware degradation.</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <h3>Background Processes</h3>
+                    <p>Unnecessary background applications consuming valuable system resources that should be dedicated to gaming.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="solution-section">
+        <div class="solution-content">
+            <h2>WHAT IF I TOLD YOU I CAN FIX ALL THESE ISSUES?</h2>
+            <p style="font-size: 1.5rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">Let me help you unlock the true performance your PC deserves!</p>
+            
+            <div class="stats">
+                <div class="stat-item fade-in">
+                    <div class="stat-number" id="clients-count">0</div>
+                    <div class="stat-label">Satisfied Clients</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" id="systems-count">0</div>
+                    <div class="stat-label">Systems Optimized</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" id="fps-count">0</div>
+                    <div class="stat-label">Average FPS Boost</div>
+                </div>
+            </div>
+            
+            <div class="price-tag pulse">SERVICE PRICE: Only $69 (tax included)</div>
+            <a href="#contact" class="cta-button">SCHEDULE OPTIMIZATION</a>
+        </div>
+    </section>
+    
+    <section class="testimonial-section">
+        <div class="container">
+            <h2>WHAT OUR CLIENTS SAY</h2>
+            <div class="testimonials">
+                <div class="testimonial fade-in">
+                    <div class="testimonial-text">
+                        "After Sigma's optimization, my FPS in Warzone increased from 90 to 140! The system feels brand new. Worth every penny."
+                    </div>
+                    <div class="testimonial-author">- James R., Competitive Gamer</div>
+                </div>
+                <div class="testimonial fade-in">
+                    <div class="testimonial-text">
+                        "I was skeptical at first, but the difference is night and day. My PC runs cooler and smoother than ever before."
+                    </div>
+                    <div class="testimonial-author">- Sarah K., Streamer</div>
+                </div>
+                <div class="testimonial fade-in">
+                    <div class="testimonial-text">
+                        "Professional service with clear communication. Fixed all my stuttering issues in demanding games. Highly recommended!"
+                    </div>
+                    <div class="testimonial-author">- Michael T., Game Developer</div>
+                </div>
+                <div class="testimonial fade-in">
+                    <div class="testimonial-text">
+                        "My old gaming laptop got a second life after optimization. Can't believe it runs Cyberpunk at playable framerates now!"
+                    </div>
+                    <div class="testimonial-author">- David L., College Student</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about-section">
+        <div class="container">
+            <h2>ABOUT ME</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Let me introduce myself and my passion for PC optimization.</p>
+                    <p>My name is Marc-Andry KEKE. I'm based in Ottawa, Canada and I've been passionate about gaming and PC performance for over 5 years. I've experienced every possible PC performance issue firsthand - from frustrating lag spikes to mysterious crashes.</p>
+                    <p>Like many of you, I tried countless online "optimization guides" only to find most either didn't work or made my system worse. This frustration led me to develop professional optimization techniques that actually deliver results.</p>
+                    <p>I understand the hesitation in trusting someone with your system. That's why I emphasize transparency and security in all my services. Your trust is my most valuable asset.</p>
+                    <p>My approach combines technical expertise with a gamer's perspective - I optimize systems to deliver real-world gaming performance, not just benchmark numbers.</p>
+                </div>
+                <div class="about-image float">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Professional PC Technician">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="notes-section">
+        <div class="container">
+            <h2>IMPORTANT INFORMATION</h2>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem; text-align: center;">Please review these key points before proceeding with optimization services</p>
+            
+            <div class="notes-grid">
+                <div class="note-card fade-in">
+                    <h3>Data Security</h3>
+                    <p>Always backup your important files before any optimization. I recommend a fresh Windows installation for maximum security and performance.</p>
+                </div>
+                <div class="note-card fade-in">
+                    <h3>Hardware Limitations</h3>
+                    <p>While optimization can significantly improve performance, it cannot overcome fundamental hardware limitations. Realistic expectations are important.</p>
+                </div>
+                <div class="note-card fade-in">
+                    <h3>Thermal Considerations</h3>
+                    <p>If your system has cooling issues, please mention this as thermal throttling can negate many performance improvements.</p>
+                </div>
+                <div class="note-card fade-in">
+                    <h3>Transparency</h3>
+                    <p>I will explain all changes made to your system and provide documentation of the optimization process upon request.</p>
+                </div>
+                <div class="note-card fade-in">
+                    <h3>No Hardware Replacement</h3>
+                    <p>This service focuses on software optimization. Hardware upgrades may be recommended but are not included.</p>
+                </div>
+                <div class="note-card fade-in">
+                    <h3>Detailed Information</h3>
+                    <p>The more details you provide about your performance issues, the better I can tailor the optimization to your specific needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>CONTACT ME</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 3rem;">Ready to unlock your PC's full potential? Get in touch today!</p>
+            
+            <div class="contact-methods">
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone</h3>
+                    <p><a href="tel:+18197128461">+1 (819) 712-8461</a></p>
+                </div>
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:keke26.com@gmail.com">keke26.com@gmail.com</a></p>
+                </div>
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">💬</div>
+                    <h3>Discord</h3>
+                    <p><a href="https://discord.com" target="_blank">marc_sigma</a></p>
+                </div>
+            </div>
+            
+            <div class="availability fade-in">
+                <h3>AVAILABILITY</h3>
+                <p>Summer Hours: Daily 7AM - 7PM EST</p>
+                <p>Response Time: Typically within 2 hours during business hours</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p style="margin-bottom: 1rem;">&copy; 2023 Sigma PC Optimization. All rights reserved.</p>
+            <p style="opacity: 0.7;">Professional PC optimization services for gamers by gamers.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Counter animation for stats
+        function animateCounters() {
+            const clientsCounter = document.getElementById('clients-count');
+            const systemsCounter = document.getElementById('systems-count');
+            const fpsCounter = document.getElementById('fps-count');
+            
+            const targetClients = 247;
+            const targetSystems = 312;
+            const targetFPS = 45;
+            
+            let currentClients = 0;
+            let currentSystems = 0;
+            let currentFPS = 0;
+            
+            const increment = Math.max(
+                Math.ceil(targetClients / 50),
+                Math.ceil(targetSystems / 50),
+                Math.ceil(targetFPS / 50)
+            );
+            
+            const interval = setInterval(() => {
+                if (currentClients < targetClients) {
+                    currentClients = Math.min(currentClients + increment, targetClients);
+                    clientsCounter.textContent = currentClients + '+';
+                }
+                
+                if (currentSystems < targetSystems) {
+                    currentSystems = Math.min(currentSystems + increment, targetSystems);
+                    systemsCounter.textContent = currentSystems + '+';
+                }
+                
+                if (currentFPS < targetFPS) {
+                    currentFPS = Math.min(currentFPS + increment, targetFPS);
+                    fpsCounter.textContent = currentFPS + '%';
+                }
+                
+                if (currentClients >= targetClients && 
+                    currentSystems >= targetSystems && 
+                    currentFPS >= targetFPS) {
+                    clearInterval(interval);
+                }
+            }, 30);
+        }
+        
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Start counter animation when stats section is visible
+                    if (entry.target.classList.contains('stat-item')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Add hover effect to problem cards
+        document.querySelectorAll('.problem-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('h3::before');
+                if (icon) {
+                    icon.style.transform = 'rotate(10deg)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('h3::before');
+                if (icon) {
+                    icon.style.transform = 'rotate(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
