@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlLang">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -439,6 +439,37 @@
             opacity: 0.8;
         }
         
+        /* Language switcher styles */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 5px;
+        }
+
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .language-switcher button:hover {
+            background: var(--accent);
+        }
+        
+        .language-switcher button.active {
+            background: var(--accent);
+        }
+        
         @media (max-width: 992px) {
             .about-content {
                 flex-direction: column;
@@ -477,6 +508,11 @@
             .contact-card {
                 width: 100%;
                 max-width: 350px;
+            }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
             }
         }
         
@@ -526,6 +562,10 @@
     <header>
         <div class="header-overlay"></div>
         <div class="header-content">
+            <div class="language-switcher">
+                <button onclick="switchLanguage('en')" class="active" id="enBtn">EN</button>
+                <button onclick="switchLanguage('fr')" id="frBtn">FR</button>
+            </div>
             <h1 class="glowing-text">Sigma PC Optimization</h1>
             <p class="tagline">MAXIMIZE YOUR GAMING PERFORMANCE WITH PROFESSIONAL PC TUNING</p>
             <a href="#contact" class="cta-button pulse">GET OPTIMIZED NOW</a>
@@ -777,45 +817,341 @@
             }, 30);
         }
         
-        // Intersection Observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Start counter animation when stats section is visible
-                    if (entry.target.classList.contains('stat-item')) {
-                        animateCounters();
+        // Language switching functionality
+        const translations = {
+            en: {
+                title: "Sigma PC Optimization",
+                tagline: "MAXIMIZE YOUR GAMING PERFORMANCE WITH PROFESSIONAL PC TUNING",
+                cta: "GET OPTIMIZED NOW",
+                issuesTitle: "COMMON PC PERFORMANCE ISSUES",
+                issuesSubtitle: "These are the most frequent problems that prevent your PC from reaching its full potential",
+                problems: [
+                    {
+                        title: "Faulty Operating System",
+                        description: "A misconfigured or corrupted OS can significantly slow down your computer and cause instability during gaming sessions."
+                    },
+                    {
+                        title: "Outdated Drivers",
+                        description: "Old or incorrect drivers can cause performance issues, crashes, and prevent your hardware from working optimally."
+                    },
+                    {
+                        title: "CPU/GPU Underperformance",
+                        description: "Improper configuration or thermal throttling can drastically reduce your processor and graphics card capabilities."
+                    },
+                    {
+                        title: "Faulty BIOS Firmware",
+                        description: "An outdated or misconfigured BIOS can prevent your hardware from functioning at its full potential."
+                    },
+                    {
+                        title: "Over-Optimization",
+                        description: "Many online \"optimizations\" actually hurt performance by disabling essential services or breaking system functionality."
+                    },
+                    {
+                        title: "Registry Issues",
+                        description: "A bloated Windows registry can slow down your system and cause various errors and instability."
+                    },
+                    {
+                        title: "Overheating",
+                        description: "Poor thermal management leads to throttling, reduced performance, and hardware degradation."
+                    },
+                    {
+                        title: "Background Processes",
+                        description: "Unnecessary background applications consuming valuable system resources that should be dedicated to gaming."
                     }
-                }
+                ],
+                solutionTitle: "WHAT IF I TOLD YOU I CAN FIX ALL THESE ISSUES?",
+                solutionText: "Let me help you unlock the true performance your PC deserves!",
+                clientsLabel: "Satisfied Clients",
+                systemsLabel: "Systems Optimized",
+                fpsLabel: "Average FPS Boost",
+                priceTag: "SERVICE PRICE: Only $69 (tax included)",
+                scheduleBtn: "SCHEDULE OPTIMIZATION",
+                testimonialsTitle: "WHAT OUR CLIENTS SAY",
+                testimonials: [
+                    {
+                        text: "\"After Sigma's optimization, my FPS in Warzone increased from 90 to 140! The system feels brand new. Worth every penny.\"",
+                        author: "- James R., Competitive Gamer"
+                    },
+                    {
+                        text: "\"I was skeptical at first, but the difference is night and day. My PC runs cooler and smoother than ever before.\"",
+                        author: "- Sarah K., Streamer"
+                    },
+                    {
+                        text: "\"Professional service with clear communication. Fixed all my stuttering issues in demanding games. Highly recommended!\"",
+                        author: "- Michael T., Game Developer"
+                    },
+                    {
+                        text: "\"My old gaming laptop got a second life after optimization. Can't believe it runs Cyberpunk at playable framerates now!\"",
+                        author: "- David L., College Student"
+                    }
+                ],
+                aboutTitle: "ABOUT ME",
+                aboutTexts: [
+                    "Let me introduce myself and my passion for PC optimization.",
+                    "My name is sigma. I'm based in Ottawa, Canada and I've been passionate about gaming and PC performance for over 5 years. I've experienced every possible PC performance issue firsthand - from frustrating lag spikes to mysterious crashes.",
+                    "Like many of you, I tried countless online \"optimization guides\" only to find most either didn't work or made my system worse. This frustration led me to develop professional optimization techniques that actually deliver results.",
+                    "I understand the hesitation in trusting someone with your system. That's why I emphasize transparency and security in all my services. Your trust is my most valuable asset.",
+                    "My approach combines technical expertise with a gamer's perspective - I optimize systems to deliver real-world gaming performance, not just benchmark numbers."
+                ],
+                notesTitle: "IMPORTANT INFORMATION",
+                notesSubtitle: "Please review these key points before proceeding with optimization services",
+                notes: [
+                    {
+                        title: "Data Security",
+                        description: "Always backup your important files before any optimization. I recommend a fresh Windows installation for maximum security and performance."
+                    },
+                    {
+                        title: "Hardware Limitations",
+                        description: "While optimization can significantly improve performance, it cannot overcome fundamental hardware limitations. Realistic expectations are important."
+                    },
+                    {
+                        title: "Thermal Considerations",
+                        description: "If your system has cooling issues, please mention this as thermal throttling can negate many performance improvements."
+                    },
+                    {
+                        title: "Transparency",
+                        description: "I will explain all changes made to your system and provide documentation of the optimization process upon request."
+                    },
+                    {
+                        title: "No Hardware Replacement",
+                        description: "This service focuses on software optimization. Hardware upgrades may be recommended but are not included."
+                    },
+                    {
+                        title: "Detailed Information",
+                        description: "The more details you provide about your performance issues, the better I can tailor the optimization to your specific needs."
+                    }
+                ],
+                contactTitle: "CONTACT ME",
+                contactText: "Ready to unlock your PC's full potential? Get in touch today!",
+                availabilityTitle: "AVAILABILITY",
+                availabilityTexts: [
+                    "Summer Hours: Daily 7AM - 7PM EST",
+                    "Response Time: Typically within 2 hours during business hours"
+                ],
+                footerTexts: [
+                    "&copy; 2023 Sigma PC Optimization. All rights reserved.",
+                    "Professional PC optimization services for gamers by gamers."
+                ]
+            },
+            fr: {
+                title: "Optimisation PC Sigma",
+                tagline: "MAXIMISEZ VOS PERFORMANCES DE JEU AVEC UN RÉGLAGE PROFESSIONNEL",
+                cta: "OPTIMISEZ MAINTENANT",
+                issuesTitle: "PROBLÈMES COURANTS DE PERFORMANCE",
+                issuesSubtitle: "Voici les problèmes les plus fréquents qui empêchent votre PC d'atteindre son plein potentiel",
+                problems: [
+                    {
+                        title: "Système d'exploitation défectueux",
+                        description: "Un OS mal configuré ou corrompu peut considérablement ralentir votre ordinateur et causer des instabilités pendant les sessions de jeu."
+                    },
+                    {
+                        title: "Pilotes obsolètes",
+                        description: "Des pilotes anciens ou incorrects peuvent causer des problèmes de performance, des plantages et empêcher votre matériel de fonctionner de manière optimale."
+                    },
+                    {
+                        title: "Sous-performance CPU/GPU",
+                        description: "Une configuration incorrecte ou le throttling thermique peut réduire considérablement les capacités de votre processeur et carte graphique."
+                    },
+                    {
+                        title: "BIOS défectueux",
+                        description: "Un BIOS obsolète ou mal configuré peut empêcher votre matériel de fonctionner à son plein potentiel."
+                    },
+                    {
+                        title: "Sur-optimisation",
+                        description: "De nombreux \"guides d'optimisation\" en ligne nuisent en réalité aux performances en désactivant des services essentiels ou en cassant des fonctionnalités système."
+                    },
+                    {
+                        title: "Problèmes de registre",
+                        description: "Un registre Windows encombré peut ralentir votre système et causer diverses erreurs et instabilités."
+                    },
+                    {
+                        title: "Surchauffe",
+                        description: "Une mauvaise gestion thermique entraîne du throttling, des performances réduites et une dégradation du matériel."
+                    },
+                    {
+                        title: "Processus en arrière-plan",
+                        description: "Des applications inutiles en arrière-plan consomment des ressources système précieuses qui devraient être dédiées au jeu."
+                    }
+                ],
+                solutionTitle: "ET SI JE VOUS DISAIS QUE JE PEUX RÉSOUDRE TOUS CES PROBLÈMES ?",
+                solutionText: "Laissez-moi vous aider à libérer les vraies performances de votre PC !",
+                clientsLabel: "Clients Satisfaits",
+                systemsLabel: "Systèmes Optimisés",
+                fpsLabel: "Gain Moyen de FPS",
+                priceTag: "PRIX DU SERVICE : Seulement 69$ (taxes incluses)",
+                scheduleBtn: "PLANIFIER L'OPTIMISATION",
+                testimonialsTitle: "TEMOIGNAGES DE NOS CLIENTS",
+                testimonials: [
+                    {
+                        text: "\"Après l'optimisation par Sigma, mes FPS dans Warzone sont passés de 90 à 140 ! Le système semble tout neuf. Ça vaut chaque centime.\"",
+                        author: "- James R., Joueur Compétitif"
+                    },
+                    {
+                        text: "\"J'étais sceptique au début, mais la différence est jour et nuit. Mon PC fonctionne plus froid et plus fluide que jamais.\"",
+                        author: "- Sarah K., Streamer"
+                    },
+                    {
+                        text: "\"Service professionnel avec une communication claire. A résolu tous mes problèmes de saccades dans les jeux exigeants. Je recommande vivement !\"",
+                        author: "- Michael T., Développeur de Jeux"
+                    },
+                    {
+                        text: "\"Mon vieux PC portable a eu une seconde vie après l'optimisation. Incroyable qu'il puisse maintenant faire tourner Cyberpunk avec des FPS jouables !\"",
+                        author: "- David L., Étudiant"
+                    }
+                ],
+                aboutTitle: "À PROPOS DE MOI",
+                aboutTexts: [
+                    "Permettez-moi de me présenter et de partager ma passion pour l'optimisation PC.",
+                    "Je m'appelle sigma. Je suis basé à Ottawa, Canada et je suis passionné par le gaming et les performances PC depuis plus de 5 ans. J'ai expérimenté personnellement tous les problèmes de performance possibles - des laggs frustrants aux plantages mystérieux.",
+                    "Comme beaucoup d'entre vous, j'ai essayé d'innombrables \"guides d'optimisation\" en ligne pour finalement découvrir que la plupart ne fonctionnaient pas ou empirent mon système. Cette frustration m'a conduit à développer des techniques d'optimisation professionnelles qui donnent réellement des résultats.",
+                    "Je comprends l'hésitation à faire confiance à quelqu'un avec votre système. C'est pourquoi j'insiste sur la transparence et la sécurité dans tous mes services. Votre confiance est mon atout le plus précieux.",
+                    "Mon approche combine une expertise technique avec une perspective de joueur - j'optimise les systèmes pour offrir des performances réelles en jeu, pas seulement des chiffres de benchmark."
+                ],
+                notesTitle: "INFORMATIONS IMPORTANTES",
+                notesSubtitle: "Veuillez consulter ces points clés avant de procéder aux services d'optimisation",
+                notes: [
+                    {
+                        title: "Sécurité des données",
+                        description: "Toujours sauvegarder vos fichiers importants avant toute optimisation. Je recommande une installation fraîche de Windows pour une sécurité et des performances maximales."
+                    },
+                    {
+                        title: "Limites matérielles",
+                        description: "Bien que l'optimisation puisse considérablement améliorer les performances, elle ne peut pas surmonter les limites matérielles fondamentales. Des attentes réalistes sont importantes."
+                    },
+                    {
+                        title: "Considérations thermiques",
+                        description: "Si votre système a des problèmes de refroidissement, merci de le mentionner car le throttling thermique peut annuler de nombreuses améliorations de performance."
+                    },
+                    {
+                        title: "Transparence",
+                        description: "J'expliquerai tous les changements apportés à votre système et fournirai une documentation du processus d'optimisation sur demande."
+                    },
+                    {
+                        title: "Pas de remplacement matériel",
+                        description: "Ce service se concentre sur l'optimisation logicielle. Des mises à niveau matérielles peuvent être recommandées mais ne sont pas incluses."
+                    },
+                    {
+                        title: "Informations détaillées",
+                        description: "Plus vous fournirez de détails sur vos problèmes de performance, mieux je pourrai adapter l'optimisation à vos besoins spécifiques."
+                    }
+                ],
+                contactTitle: "CONTACTEZ-MOI",
+                contactText: "Prêt à libérer le plein potentiel de votre PC ? Contactez-moi dès aujourd'hui !",
+                availabilityTitle: "DISPONIBILITÉ",
+                availabilityTexts: [
+                    "Heures d'été : Tous les jours de 7h à 19h EST",
+                    "Temps de réponse : Généralement dans les 2 heures pendant les heures d'ouverture"
+                ],
+                footerTexts: [
+                    "&copy; 2023 Optimisation PC Sigma. Tous droits réservés.",
+                    "Services professionnels d'optimisation PC par des gamers pour des gamers."
+                ]
+            }
+        };
+
+        function switchLanguage(lang) {
+            document.getElementById('htmlLang').setAttribute('lang', lang);
+            const t = translations[lang];
+            
+            // Update UI elements
+            document.querySelector('h1').textContent = t.title;
+            document.querySelector('.tagline').textContent = t.tagline;
+            document.querySelector('.cta-button').textContent = t.cta;
+            
+            // Problems section
+            document.querySelector('.problems-section h2').textContent = t.issuesTitle;
+            document.querySelector('.problems-section p').textContent = t.issuesSubtitle;
+            document.querySelectorAll('.problem-card h3').forEach((el, i) => {
+                el.textContent = t.problems[i].title;
             });
-        }, {
-            threshold: 0.1
-        });
-        
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
-        });
-        
-        // Add hover effect to problem cards
-        document.querySelectorAll('.problem-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const icon = card.querySelector('h3::before');
-                if (icon) {
-                    icon.style.transform = 'rotate(10deg)';
-                }
+            document.querySelectorAll('.problem-card p').forEach((el, i) => {
+                el.textContent = t.problems[i].description;
             });
             
-            card.addEventListener('mouseleave', () => {
-                const icon = card.querySelector('h3::before');
-                if (icon) {
-                    icon.style.transform = 'rotate(0)';
-                }
+            // Solution section
+            document.querySelector('.solution-section h2').textContent = t.solutionTitle;
+            document.querySelector('.solution-section p').textContent = t.solutionText;
+            document.querySelectorAll('.stat-label')[0].textContent = t.clientsLabel;
+            document.querySelectorAll('.stat-label')[1].textContent = t.systemsLabel;
+            document.querySelectorAll('.stat-label')[2].textContent = t.fpsLabel;
+            document.querySelector('.price-tag').textContent = t.priceTag;
+            document.querySelector('.solution-section .cta-button').textContent = t.scheduleBtn;
+            
+            // Testimonials
+            document.querySelector('.testimonial-section h2').textContent = t.testimonialsTitle;
+            document.querySelectorAll('.testimonial-text').forEach((el, i) => {
+                el.textContent = t.testimonials[i].text;
+            });
+            document.querySelectorAll('.testimonial-author').forEach((el, i) => {
+                el.textContent = t.testimonials[i].author;
+            });
+            
+            // About section
+            document.querySelector('.about-section h2').textContent = t.aboutTitle;
+            document.querySelectorAll('.about-text p').forEach((el, i) => {
+                el.textContent = t.aboutTexts[i];
+            });
+            
+            // Notes section
+            document.querySelector('.notes-section h2').textContent = t.notesTitle;
+            document.querySelector('.notes-section p').textContent = t.notesSubtitle;
+            document.querySelectorAll('.note-card h3').forEach((el, i) => {
+                el.textContent = t.notes[i].title;
+            });
+            document.querySelectorAll('.note-card p').forEach((el, i) => {
+                el.textContent = t.notes[i].description;
+            });
+            
+            // Contact section
+            document.querySelector('.contact-section h2').textContent = t.contactTitle;
+            document.querySelector('.contact-section p').textContent = t.contactText;
+            document.querySelector('.availability h3').textContent = t.availabilityTitle;
+            document.querySelectorAll('.availability p').forEach((el, i) => {
+                el.textContent = t.availabilityTexts[i];
+            });
+            
+            // Footer
+            document.querySelectorAll('footer p').forEach((el, i) => {
+                el.innerHTML = t.footerTexts[i];
+            });
+            
+            // Update active language button
+            document.getElementById('enBtn').classList.remove('active');
+            document.getElementById('frBtn').classList.remove('active');
+            document.getElementById(lang + 'Btn').classList.add('active');
+            
+            // Store language preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Check language preference on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
+            switchLanguage(preferredLanguage);
+            
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Start counter animation when stats section is visible
+                        if (entry.target.classList.contains('stat-item')) {
+                            animateCounters();
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
             });
         });
+
+        // Expose switchLanguage to global scope for buttons
+        window.switchLanguage = switchLanguage;
     </script>
 </body>
 </html>
-
-
-
